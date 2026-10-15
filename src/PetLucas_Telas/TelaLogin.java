@@ -43,7 +43,7 @@ public class TelaLogin extends javax.swing.JFrame {
         NomeLabel = new java.awt.Label();
         NomeInput = new java.awt.TextField();
         SenhaLabel = new java.awt.Label();
-        SenhaInput = new java.awt.TextField();
+        SenhaInput = new javax.swing.JPasswordField();
         BotaoEntrar = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,8 +60,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         NomeLabel.setText("Nome:");
 
-        NomeInput.setForeground(new java.awt.Color(221, 221, 221));
-        NomeInput.setText("Digite seu nome...");
+        NomeInput.setForeground(new java.awt.Color(0, 0, 0));
         NomeInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NomeInputActionPerformed(evt);
@@ -70,8 +69,9 @@ public class TelaLogin extends javax.swing.JFrame {
 
         SenhaLabel.setText("Senha:");
 
-        SenhaInput.setForeground(new java.awt.Color(221, 221, 221));
-        SenhaInput.setText("Digite sua senha...");
+        SenhaInput.setText("jPasswordField1");
+        SenhaInput.setActionCommand("<Not Set>");
+        SenhaInput.setName("SenhaInput"); // NOI18N
         SenhaInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SenhaInputActionPerformed(evt);
@@ -94,7 +94,7 @@ public class TelaLogin extends javax.swing.JFrame {
                             .addComponent(SenhaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(NomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(NomeInput, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                            .addComponent(SenhaInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(SenhaInput))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(FundoLoginLayout.createSequentialGroup()
@@ -113,9 +113,9 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addComponent(NomeInput, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addComponent(SenhaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(SenhaInput, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGap(2, 2, 2)
+                .addComponent(SenhaInput, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(BotaoEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -170,7 +170,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private java.awt.Panel FundoTela;
     private java.awt.TextField NomeInput;
     private java.awt.Label NomeLabel;
-    private java.awt.TextField SenhaInput;
+    private javax.swing.JPasswordField SenhaInput;
     private java.awt.Label SenhaLabel;
     private java.awt.Label TextoBoasVindas;
     // End of variables declaration//GEN-END:variables
