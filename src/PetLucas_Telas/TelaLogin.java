@@ -2,17 +2,18 @@ package PetLucas_Telas;
 
 import java.awt.Font;
 import java.io.InputStream;
+import javax.swing.JOptionPane;
 
 public class TelaLogin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaLogin.class.getName());
 
     public TelaLogin() {
-        initComponents();
+        initComponents();   
         
-        // Aplicando a fonte principal
         try {
-            java.io.InputStream isPrimaryFont = getClass().getResourceAsStream("/Assets/CrimsonText-Regular.ttf");
+            // Aplicando a fonte principal
+            java.io.InputStream isPrimaryFont = getClass().getResourceAsStream("/Assets/Fonts/CrimsonText-Regular.ttf");
             java.awt.Font primaryFont = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, isPrimaryFont);  
             
             java.awt.Font titleFont = primaryFont.deriveFont(java.awt.Font.PLAIN, 20f);
@@ -20,13 +21,13 @@ public class TelaLogin extends javax.swing.JFrame {
             TextoBoasVindas.setFont(titleFont);
             
             // Aplicando a fonte secundaria
-            java.io.InputStream isSecondFont = getClass().getResourceAsStream("/Assets/source-serif-pro.regular.ttf");
+            java.io.InputStream isSecondFont = getClass().getResourceAsStream("/Assets/Fonts/source-serif-pro.regular.ttf");
             java.awt.Font secondaryFont = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, isSecondFont);
             
             java.awt.Font textFont = secondaryFont.deriveFont(java.awt.Font.PLAIN, 14f);
             
             NomeLabel.setFont(textFont);
-            
+            SenhaLabel.setFont(textFont);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -69,7 +70,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         SenhaLabel.setText("Senha:");
 
-        SenhaInput.setText("jPasswordField1");
+        SenhaInput.setToolTipText("");
         SenhaInput.setActionCommand("<Not Set>");
         SenhaInput.setName("SenhaInput"); // NOI18N
         SenhaInput.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +81,11 @@ public class TelaLogin extends javax.swing.JFrame {
 
         BotaoEntrar.setBackground(new java.awt.Color(107, 246, 98));
         BotaoEntrar.setLabel("Entrar");
+        BotaoEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoEntrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout FundoLoginLayout = new javax.swing.GroupLayout(FundoLogin);
         FundoLogin.setLayout(FundoLoginLayout);
@@ -158,6 +164,43 @@ public class TelaLogin extends javax.swing.JFrame {
     private void SenhaInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SenhaInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SenhaInputActionPerformed
+
+    private void BotaoEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoEntrarActionPerformed
+        String nome = NomeInput.getText().trim();
+        String senha = new String(SenhaInput.getPassword()); // Convertendo a senha para string
+        
+        TelaHome home = new TelaHome();
+        
+        if (nome.isEmpty() || senha.isEmpty()) {
+            JOptionPane.showMessageDialog(this, // Criando um popup de aviso
+                "Os campos de nome e senha não podem ser vazios",
+                "Aviso",
+                JOptionPane.WARNING_MESSAGE
+            );
+        }
+        
+        if (nome.equals("Lucas") && senha.equals("12345")) {
+            JOptionPane.showMessageDialog(this,
+                "Seja bem vindo à PetLucas!",
+                "Sucesso",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            
+            home.setVisible(true);
+            
+            this.dispose();
+        }
+        else {
+            JOptionPane.showMessageDialog(this, 
+                "Usuário ou senha incorretos. Tente novamente",
+                "Erro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            
+            NomeInput.setText("");
+            SenhaInput.setText("");
+        }
+    }//GEN-LAST:event_BotaoEntrarActionPerformed
 
     public static void main(String args[]) {
         /* Create and display the form */
