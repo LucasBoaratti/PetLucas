@@ -1,6 +1,7 @@
 package PetLucas_Telas;
 
 import Components.CardProduto;
+import Components.CardProdutosRecomendados;
 import java.awt.Font;
 import java.io.InputStream;
 
@@ -11,6 +12,7 @@ public class TelaHome extends javax.swing.JFrame {
     public TelaHome() {
         initComponents();
         carregarProdutos();
+        carregarProdutosRecomendados();
         
         try {
             // Aplicando a fonte principal
@@ -23,6 +25,7 @@ public class TelaHome extends javax.swing.JFrame {
             ProdutosLabel.setFont(titleFont);
             CarrinhoLabel.setFont(titleFont);
             TextoBoasVindas.setFont(titleFont);
+            TextoRecomendado.setFont(titleFont);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -70,6 +73,53 @@ public class TelaHome extends javax.swing.JFrame {
             PainelProdutos.repaint();
         }
     }
+    
+    private void carregarProdutosRecomendados() {
+        String nomesRecomendados[] = {
+            "Mordedor para cachorro",
+            "Mordedor para cachorro",
+            "Mordedor para cachorro",
+            "Mordedor para cachorro",
+            "Mordedor para cachorro",
+            "Mordedor para cachorro",
+            "Mordedor para cachorro",
+            "Mordedor para cachorro",
+        };
+        
+        float precosRecomendados[] = {
+            14.99f,
+            14.99f,
+            14.99f,
+            14.99f,
+            14.99f,
+            14.99f,
+            14.99f,
+            14.99f,
+        };
+        
+        String imagensRecomendados[] = {
+            "/Assets/Images/MordedorCachorro.png",
+            "/Assets/Images/MordedorCachorro.png",
+            "/Assets/Images/MordedorCachorro.png",
+            "/Assets/Images/MordedorCachorro.png",
+            "/Assets/Images/MordedorCachorro.png",
+            "/Assets/Images/MordedorCachorro.png",
+            "/Assets/Images/MordedorCachorro.png",
+            "/Assets/Images/MordedorCachorro.png",
+        };
+        
+        // Laço que cria cada card com o produto
+        for (int i = 0; i < nomesRecomendados.length; i++) {
+            CardProdutosRecomendados card = new CardProdutosRecomendados();
+            
+            card.setDadosProduto(nomesRecomendados[i], precosRecomendados[i], imagensRecomendados[i]);
+            
+            PainelProdutosRecomendados.add(card);
+            
+            PainelProdutosRecomendados.revalidate();
+            PainelProdutosRecomendados.repaint();
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -82,6 +132,8 @@ public class TelaHome extends javax.swing.JFrame {
         CarrinhoLabel = new javax.swing.JLabel();
         TextoBoasVindas = new javax.swing.JLabel();
         PainelProdutos = new javax.swing.JPanel();
+        TextoRecomendado = new javax.swing.JLabel();
+        PainelProdutosRecomendados = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,20 +183,29 @@ public class TelaHome extends javax.swing.JFrame {
         PainelProdutos.setPreferredSize(new java.awt.Dimension(525, 170));
         PainelProdutos.setLayout(new java.awt.GridLayout(0, 3, 20, 15));
 
+        TextoRecomendado.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        TextoRecomendado.setText("Recomendado para seu bichano");
+
+        PainelProdutosRecomendados.setLayout(new java.awt.GridLayout(0, 4, 28, 28));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Cabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(PainelProdutosRecomendados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PainelProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(TextoBoasVindas)
+                        .addGap(119, 119, 119)))
+                .addGap(49, 49, 49))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(PainelProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(TextoBoasVindas)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(224, 224, 224)
+                .addComponent(TextoRecomendado)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,7 +215,11 @@ public class TelaHome extends javax.swing.JFrame {
                 .addComponent(TextoBoasVindas)
                 .addGap(18, 18, 18)
                 .addComponent(PainelProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(TextoRecomendado)
+                .addGap(20, 20, 20)
+                .addComponent(PainelProdutosRecomendados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(482, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,7 +235,9 @@ public class TelaHome extends javax.swing.JFrame {
     private javax.swing.JLabel HomeLabel;
     private javax.swing.JLabel LogoMarca;
     private javax.swing.JPanel PainelProdutos;
+    private javax.swing.JPanel PainelProdutosRecomendados;
     private javax.swing.JLabel ProdutosLabel;
     private javax.swing.JLabel TextoBoasVindas;
+    private javax.swing.JLabel TextoRecomendado;
     // End of variables declaration//GEN-END:variables
 }

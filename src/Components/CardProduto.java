@@ -11,7 +11,7 @@ public class CardProduto extends javax.swing.JPanel {
             java.awt.Font primaryFont = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, isPrimaryFont);  
             
             java.awt.Font font = primaryFont.deriveFont(java.awt.Font.PLAIN, 10f);
-            java.awt.Font buttonFont = primaryFont.deriveFont(java.awt.Font.PLAIN, 8f);
+            java.awt.Font buttonFont = primaryFont.deriveFont(java.awt.Font.PLAIN, 10f);
             
             NomeProduto.setFont(font);
             PrecoProduto.setFont(font);
