@@ -58,7 +58,9 @@ public class CardProduto extends javax.swing.JPanel {
         PrecoProduto.setText("PrecoProduto");
 
         BotaoVerProduto.setBackground(new java.awt.Color(107, 246, 98));
+        BotaoVerProduto.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         BotaoVerProduto.setLabel("Ver produto");
+        BotaoVerProduto.addActionListener(this::BotaoVerProdutoActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -89,11 +91,15 @@ public class CardProduto extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(ImagemProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(BotaoVerProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BotaoVerProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoVerProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotaoVerProdutoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

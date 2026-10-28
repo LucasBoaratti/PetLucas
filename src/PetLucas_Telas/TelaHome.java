@@ -26,6 +26,7 @@ public class TelaHome extends javax.swing.JFrame {
             CarrinhoLabel.setFont(titleFont);
             TextoBoasVindas.setFont(titleFont);
             TextoRecomendado.setFont(titleFont);
+            TextoRodape.setFont(titleFont);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -35,30 +36,30 @@ public class TelaHome extends javax.swing.JFrame {
     // Carregando os produtos a partir do card criado
     private void carregarProdutos() {
         String nomes[] = {
-            "Ração para cachorro golden special carne",
-            "Ração para cachorro golden special carne",
-            "Ração para cachorro golden special carne",
-            "Ração para cachorro golden special carne",
-            "Ração para cachorro golden special carne",
-            "Ração para cachorro golden special carne",
+            "Ração para cachorros golden special carne",
+            "Ração para gatos golden special carne e frango",
+            "Arranhador para gatos macio e duro",
+            "Túnel com 4 saídas de brinquedo para gatos divertidos",
+            "Bolinha colorida de brinquedo para cachorros",
+            "Bolinha vazia para colocar comida para cachorros",
         };
         
         float precos[] = {
             199.99f,
-            199.99f,
-            199.99f,
-            199.99f,
-            199.99f,
-            199.99f,
+            59.99f,
+            49.99f,
+            99.99f,
+            15.99f,
+            69.99f,
         };
         
         String imagens[] = {
             "/Assets/Images/RaçãoGolden.png",
-            "/Assets/Images/RaçãoGolden.png",
-            "/Assets/Images/RaçãoGolden.png",
-            "/Assets/Images/RaçãoGolden.png",
-            "/Assets/Images/RaçãoGolden.png",
-            "/Assets/Images/RaçãoGolden.png",
+            "/Assets/Images/RaçãoGoldenGatos.png",
+            "/Assets/Images/ArranhadorGato.png",
+            "/Assets/Images/TunelGato.png",
+            "/Assets/Images/BolinhaParaCachorro.png",
+            "/Assets/Images/BolinhaComRação.png",
         };
         
         // Laço que cria cada card com o produto
@@ -76,36 +77,36 @@ public class TelaHome extends javax.swing.JFrame {
     
     private void carregarProdutosRecomendados() {
         String nomesRecomendados[] = {
-            "Mordedor para cachorro",
-            "Mordedor para cachorro",
-            "Mordedor para cachorro",
-            "Mordedor para cachorro",
-            "Mordedor para cachorro",
-            "Mordedor para cachorro",
-            "Mordedor para cachorro",
-            "Mordedor para cachorro",
+            "Ração para papagaios bico fino sabor frutas",
+            "Mordedor para cachorro, colorido",
+            "Vermífugo para gatos com vermes",
+            "Vermífugo para cachorros com vermes",
+            "Cama para cachorros cor azul",
+            "Cama para gatos cor rosa",
+            "Ração para cachorros champ sabor carne e cereal",
+            "Sachê para gatos whiskas sabor carne",
         };
         
         float precosRecomendados[] = {
+            79.99f,
             14.99f,
-            14.99f,
-            14.99f,
-            14.99f,
-            14.99f,
-            14.99f,
-            14.99f,
-            14.99f,
+            40.99f,
+            19.99f,
+            489.99f,
+            339.99f,
+            59.99f,
+            3.99f,
         };
         
         String imagensRecomendados[] = {
+            "/Assets/Images/RaçãoNutrópicaPapagaio.png",
             "/Assets/Images/MordedorCachorro.png",
-            "/Assets/Images/MordedorCachorro.png",
-            "/Assets/Images/MordedorCachorro.png",
-            "/Assets/Images/MordedorCachorro.png",
-            "/Assets/Images/MordedorCachorro.png",
-            "/Assets/Images/MordedorCachorro.png",
-            "/Assets/Images/MordedorCachorro.png",
-            "/Assets/Images/MordedorCachorro.png",
+            "/Assets/Images/VermífugoParaGato.png",
+            "/Assets/Images/VermífugoParaCachorro.png",
+            "/Assets/Images/CamaParaCachorro.png",
+            "/Assets/Images/CamaParaGato.png",
+            "/Assets/Images/RaçãoParaCachorroChamp.png",
+            "/Assets/Images/SachêParaGatos.png",
         };
         
         // Laço que cria cada card com o produto
@@ -125,6 +126,8 @@ public class TelaHome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Overflow = new javax.swing.JScrollPane();
+        PaginaHome = new javax.swing.JPanel();
         Cabecalho = new javax.swing.JPanel();
         LogoMarca = new javax.swing.JLabel();
         HomeLabel = new javax.swing.JLabel();
@@ -134,8 +137,12 @@ public class TelaHome extends javax.swing.JFrame {
         PainelProdutos = new javax.swing.JPanel();
         TextoRecomendado = new javax.swing.JLabel();
         PainelProdutosRecomendados = new javax.swing.JPanel();
+        Rodape = new javax.swing.JPanel();
+        TextoRodape = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Overflow.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         Cabecalho.setBackground(new java.awt.Color(244, 162, 244));
 
@@ -186,40 +193,86 @@ public class TelaHome extends javax.swing.JFrame {
         TextoRecomendado.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         TextoRecomendado.setText("Recomendado para seu bichano");
 
+        PainelProdutosRecomendados.setPreferredSize(new java.awt.Dimension(600, 400));
         PainelProdutosRecomendados.setLayout(new java.awt.GridLayout(0, 4, 28, 28));
+
+        Rodape.setBackground(new java.awt.Color(244, 162, 244));
+
+        TextoRodape.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        TextoRodape.setText("PetLucas, 2026");
+
+        javax.swing.GroupLayout RodapeLayout = new javax.swing.GroupLayout(Rodape);
+        Rodape.setLayout(RodapeLayout);
+        RodapeLayout.setHorizontalGroup(
+            RodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RodapeLayout.createSequentialGroup()
+                .addGap(318, 318, 318)
+                .addComponent(TextoRodape)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        RodapeLayout.setVerticalGroup(
+            RodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(TextoRodape, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout PaginaHomeLayout = new javax.swing.GroupLayout(PaginaHome);
+        PaginaHome.setLayout(PaginaHomeLayout);
+        PaginaHomeLayout.setHorizontalGroup(
+            PaginaHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PaginaHomeLayout.createSequentialGroup()
+                .addGroup(PaginaHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PaginaHomeLayout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(PainelProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PaginaHomeLayout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(PainelProdutosRecomendados, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PaginaHomeLayout.createSequentialGroup()
+                        .addGap(256, 256, 256)
+                        .addComponent(TextoRecomendado)))
+                .addGap(69, 70, Short.MAX_VALUE))
+            .addGroup(PaginaHomeLayout.createSequentialGroup()
+                .addGroup(PaginaHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Cabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Rodape, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(PaginaHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PaginaHomeLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TextoBoasVindas)
+                    .addGap(174, 174, 174)))
+        );
+        PaginaHomeLayout.setVerticalGroup(
+            PaginaHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PaginaHomeLayout.createSequentialGroup()
+                .addComponent(Cabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(PainelProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TextoRecomendado)
+                .addGap(19, 19, 19)
+                .addComponent(PainelProdutosRecomendados, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Rodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
+            .addGroup(PaginaHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PaginaHomeLayout.createSequentialGroup()
+                    .addGap(86, 86, 86)
+                    .addComponent(TextoBoasVindas)
+                    .addContainerGap(1044, Short.MAX_VALUE)))
+        );
+
+        Overflow.setViewportView(PaginaHome);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Cabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(PainelProdutosRecomendados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PainelProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(TextoBoasVindas)
-                        .addGap(119, 119, 119)))
-                .addGap(49, 49, 49))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(224, 224, 224)
-                .addComponent(TextoRecomendado)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(Overflow, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Cabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(TextoBoasVindas)
-                .addGap(18, 18, 18)
-                .addComponent(PainelProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(TextoRecomendado)
-                .addGap(20, 20, 20)
-                .addComponent(PainelProdutosRecomendados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(482, Short.MAX_VALUE))
+            .addComponent(Overflow, javax.swing.GroupLayout.DEFAULT_SIZE, 1097, Short.MAX_VALUE)
         );
 
         pack();
@@ -234,10 +287,14 @@ public class TelaHome extends javax.swing.JFrame {
     private javax.swing.JLabel CarrinhoLabel;
     private javax.swing.JLabel HomeLabel;
     private javax.swing.JLabel LogoMarca;
+    private javax.swing.JScrollPane Overflow;
+    private javax.swing.JPanel PaginaHome;
     private javax.swing.JPanel PainelProdutos;
     private javax.swing.JPanel PainelProdutosRecomendados;
     private javax.swing.JLabel ProdutosLabel;
+    private javax.swing.JPanel Rodape;
     private javax.swing.JLabel TextoBoasVindas;
     private javax.swing.JLabel TextoRecomendado;
+    private javax.swing.JLabel TextoRodape;
     // End of variables declaration//GEN-END:variables
 }

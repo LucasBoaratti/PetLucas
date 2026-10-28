@@ -24,7 +24,7 @@ public class CardProdutosRecomendados extends javax.swing.JPanel {
     
     // Adicionando os dados no card do produto
     public void setDadosProduto(String nomeProduto, float precoProduto, String pathImagemProduto) {
-        String labelNomeProduto = "<html><body style='width: 75px; text-align: center'>"
+        String labelNomeProduto = "<html><body style='width: 70px; text-align: center'>"
                 + nomeProduto
                 + "</body></html>";
         
@@ -64,13 +64,17 @@ public class CardProdutosRecomendados extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BotaoVerProduto)
-                    .addComponent(NomeProduto)
-                    .addComponent(ImagemProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PrecoProduto))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(PrecoProduto)
+                        .addComponent(NomeProduto)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(ImagemProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(BotaoVerProduto)
+                        .addContainerGap(15, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,9 +85,9 @@ public class CardProdutosRecomendados extends javax.swing.JPanel {
                 .addComponent(NomeProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PrecoProduto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BotaoVerProduto)
-                .addContainerGap())
+                .addContainerGap(12, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
