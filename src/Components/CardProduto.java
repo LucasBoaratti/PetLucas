@@ -40,11 +40,22 @@ public class CardProduto extends javax.swing.JPanel {
         PrecoProduto.setText(String.format("R$ %.2f", produto.getPreco()));
         
         // Carregando a imagem do produto
+        // Buscando a imagem
         try {
-            ImagemProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource(produto.getImagem())));
+            // Carregando a imagem individual
+            java.awt.Image imagemOriginal = javax.imageio.ImageIO.read(getClass().getResource(produto.getImagem()));
+            
+            // Definindo o tamanho da imagem
+            int largura = 55;
+            int altura = 55;
+            
+            // Redimensionando a imagem
+            java.awt.Image imagemAlterada = imagemOriginal.getScaledInstance(largura, altura, java.awt.Image.SCALE_DEFAULT);
+            
+            ImagemProduto.setIcon(new javax.swing.ImageIcon(imagemAlterada));
         }
         catch (Exception e) {
-            System.out.println("Erro ao carregar imagem: " + produto.getImagem());
+            System.out.println("Erro ao carregar a imagem: " + produto.getImagem());
         }
     }
 
