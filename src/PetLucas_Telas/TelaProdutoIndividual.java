@@ -9,6 +9,7 @@ public class TelaProdutoIndividual extends javax.swing.JFrame {
 
     public TelaProdutoIndividual() {
         initComponents();
+        adicionarLinksCabecalho();
         
         try {
             // Aplicando a fonte principal
@@ -35,6 +36,22 @@ public class TelaProdutoIndividual extends javax.swing.JFrame {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    private void adicionarLinksCabecalho() {
+        // Criando um link no label home do cabeçalho para ir para a tela home
+        HomeLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TelaHome telaHome = new TelaHome();
+                telaHome.setVisible(true);
+                
+                dispose();
+            }
+        });
+        
+        // Mudando o cursor do mouse
+        HomeLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     }
     
     // Construtor que "leva" o produto para a página de produto individual
@@ -117,7 +134,7 @@ public class TelaProdutoIndividual extends javax.swing.JFrame {
             .addGroup(CabecalhoLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(LogoMarca)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
                 .addComponent(HomeLabel)
                 .addGap(18, 18, 18)
                 .addComponent(ProdutosLabel)

@@ -37,6 +37,11 @@ public class TelaHome extends javax.swing.JFrame {
         }
     }
     
+    // Método de links para o cabeçalho (Em breve...)
+    private void adicionarLinksCabecalho() {
+        
+    }
+    
     // Carregando os produtos a partir do card criado
     private void carregarProdutos() {
         // Exibindo os produtos com arraylist
@@ -57,7 +62,7 @@ public class TelaHome extends javax.swing.JFrame {
         ));
         
         produtos.add(new Produto(
-            "Arranhador para gatos macio e duroo",
+            "Arranhador para gatos macio e duro",
             "Arranhador confortável para gatos.",
             49.99f,
             "/Assets/Images/ArranhadorGato.png",
