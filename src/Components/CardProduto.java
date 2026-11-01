@@ -40,7 +40,6 @@ public class CardProduto extends javax.swing.JPanel {
         PrecoProduto.setText(String.format("R$ %.2f", produto.getPreco()));
         
         // Carregando a imagem do produto
-        // Buscando a imagem
         try {
             // Carregando a imagem individual
             java.awt.Image imagemOriginal = javax.imageio.ImageIO.read(getClass().getResource(produto.getImagem()));

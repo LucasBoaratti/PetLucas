@@ -1,6 +1,10 @@
 package Components;
 
+import PetLucas_Telas.TelaProdutoIndividual;
+import petlucas.Produto;
+
 public class CardProdutosRecomendados extends javax.swing.JPanel {
+    private Produto produto;
     
     public CardProdutosRecomendados() {
         initComponents();
@@ -23,21 +27,33 @@ public class CardProdutosRecomendados extends javax.swing.JPanel {
     }
     
     // Adicionando os dados no card do produto
-    public void setDadosProduto(String nomeProduto, float precoProduto, String pathImagemProduto) {
+    public void setDadosProduto(Produto produto) {
+        this.produto = produto;
+        
         String labelNomeProduto = "<html><body style='width: 70px; text-align: center'>"
-                + nomeProduto
+                + produto.getNome()
                 + "</body></html>";
         
         NomeProduto.setText(labelNomeProduto);
         
-        PrecoProduto.setText(String.format("R$ %.2f", precoProduto));
+        PrecoProduto.setText(String.format("R$ %.2f", produto.getPreco()));
         
         // Carregando a imagem do produto
         try {
-            ImagemProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource(pathImagemProduto)));
+            // Carregando a imagem individual
+            java.awt.Image imagemOriginal = javax.imageio.ImageIO.read(getClass().getResource(produto.getImagem()));
+            
+            // Definindo o tamanho da imagem
+            int largura = 80;
+            int altura = 80;
+            
+            // Redimensionando a imagem
+            java.awt.Image imagemAlterada = imagemOriginal.getScaledInstance(largura, altura, java.awt.Image.SCALE_DEFAULT);
+            
+            ImagemProduto.setIcon(new javax.swing.ImageIcon(imagemAlterada));
         }
         catch (Exception e) {
-            System.out.println("Erro ao carregar imagem: " + pathImagemProduto);
+            System.out.println("Erro ao carregar a imagem: " + produto.getImagem());
         }
     }
 
@@ -58,6 +74,7 @@ public class CardProdutosRecomendados extends javax.swing.JPanel {
 
         BotaoVerProduto.setBackground(new java.awt.Color(107, 246, 98));
         BotaoVerProduto.setText("Ver produto");
+        BotaoVerProduto.addActionListener(this::BotaoVerProdutoActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -66,15 +83,11 @@ public class CardProdutosRecomendados extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(PrecoProduto)
-                        .addComponent(NomeProduto)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(ImagemProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(BotaoVerProduto)
-                        .addContainerGap(15, Short.MAX_VALUE))))
+                    .addComponent(PrecoProduto)
+                    .addComponent(NomeProduto)
+                    .addComponent(ImagemProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotaoVerProduto))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,6 +104,11 @@ public class CardProdutosRecomendados extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BotaoVerProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoVerProdutoActionPerformed
+        TelaProdutoIndividual tela = new TelaProdutoIndividual(produto);
+        
+        tela.setVisible(true);
+    }//GEN-LAST:event_BotaoVerProdutoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotaoVerProduto;
