@@ -1,6 +1,10 @@
 package Components;
 
+import PetLucas_Telas.TelaProdutoIndividual;
+import petlucas.Produto;
+
 public class CardProduto extends javax.swing.JPanel {
+    private Produto produto;
 
     public CardProduto() {
         initComponents();
@@ -23,22 +27,24 @@ public class CardProduto extends javax.swing.JPanel {
     }
     
     // Método que adiciona o produto nos cards
-    public void setDadosProduto(String nome, float preco, String pathImagem) {
+    public void setDadosProduto(Produto produto) {
+        this.produto = produto;
+        
         // Aplicando o nome do produto com tag HTML para quebrar linha
         String labelNomeProduto = "<html><body style='width: 70px; text-align: left'>"
-                + nome
+                + produto.getNome()
                 + "</body></html>";
         
         NomeProduto.setText(labelNomeProduto);
         
-        PrecoProduto.setText(String.format("R$ %.2f", preco));
+        PrecoProduto.setText(String.format("R$ %.2f", produto.getPreco()));
         
         // Carregando a imagem do produto
         try {
-            ImagemProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource(pathImagem)));
+            ImagemProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource(produto.getImagem())));
         }
         catch (Exception e) {
-            System.out.println("Erro ao carregar imagem: " + pathImagem);
+            System.out.println("Erro ao carregar imagem: " + produto.getImagem());
         }
     }
 
@@ -98,7 +104,9 @@ public class CardProduto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotaoVerProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoVerProdutoActionPerformed
-        // TODO add your handling code here:
+        TelaProdutoIndividual tela = new TelaProdutoIndividual(produto);
+        
+        tela.setVisible(true);
     }//GEN-LAST:event_BotaoVerProdutoActionPerformed
 
 

@@ -2,12 +2,14 @@ package petlucas;
 
 public class Produto {
     private String nome;
+    private String descricao;
     private float preco;
     private String imagem;
     private String tipo;
     
-    public Produto(String nome, float preco, String imagem, String tipo) {
+    public Produto(String nome, String descricao, float preco, String imagem, String tipo) {
         this.nome = nome;
+        this.descricao = descricao;
         this.preco = preco;
         this.imagem = imagem;
         this.tipo = tipo;
@@ -15,6 +17,10 @@ public class Produto {
 
     public String getNome() {
         return nome;
+    }
+    
+    public String getDescricao() {
+        return descricao;
     }
 
     public float getPreco() {
