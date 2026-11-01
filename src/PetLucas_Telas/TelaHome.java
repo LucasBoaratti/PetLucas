@@ -2,12 +2,16 @@ package PetLucas_Telas;
 
 import Components.CardProduto;
 import Components.CardProdutosRecomendados;
+import petlucas.Produto;
+import java.util.ArrayList;
 import java.awt.Font;
 import java.io.InputStream;
 
 public class TelaHome extends javax.swing.JFrame {
-    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaHome.class.getName());
+    
+    private ArrayList<Produto> produtos = new ArrayList<>();
+    private ArrayList<Produto> produtosRecomendados = new ArrayList<>();
 
     public TelaHome() {
         initComponents();
@@ -35,91 +39,144 @@ public class TelaHome extends javax.swing.JFrame {
     
     // Carregando os produtos a partir do card criado
     private void carregarProdutos() {
-        String nomes[] = {
+        // Exibindo os produtos com arraylist
+        produtos.add(new Produto(
             "Ração para cachorros golden special carne",
-            "Ração para gatos golden special carne e frango",
-            "Arranhador para gatos macio e duro",
-            "Túnel com 4 saídas de brinquedo para gatos divertidos",
-            "Bolinha colorida de brinquedo para cachorros",
-            "Bolinha vazia para colocar comida para cachorros",
-        };
-        
-        float precos[] = {
+            "Ração Golden Special sabor carne para cachorros.",
             199.99f,
-            59.99f,
-            49.99f,
-            99.99f,
-            15.99f,
-            69.99f,
-        };
-        
-        String imagens[] = {
             "/Assets/Images/RaçãoGolden.png",
+            "Ração"
+        ));
+        
+        produtos.add(new Produto(
+            "Ração para gatos golden special carne e frango",
+            "Ração Golden Special sabor carne e frango para gatos.",
+            59.99f,
             "/Assets/Images/RaçãoGoldenGatos.png",
+            "Ração"
+        ));
+        
+        produtos.add(new Produto(
+            "Arranhador para gatos macio e duroo",
+            "Arranhador confortável para gatos.",
+            49.99f,
             "/Assets/Images/ArranhadorGato.png",
+            "Brinquedos"
+        ));
+            
+        produtos.add(new Produto(
+            "Túnel com 4 saídas de brinquedo para gatos divertidos",
+            "Túnel divertido com quatro saídas para gatos.",
+            99.99f,
             "/Assets/Images/TunelGato.png",
+            "Brinquedos"
+        ));
+        
+        produtos.add(new Produto(
+            "Bolinha colorida de brinquedo para cachorros",
+            "Bolinha colorida para diversão dos cachorros.",
+            15.99f,
             "/Assets/Images/BolinhaParaCachorro.png",
+            "Brinquedos"
+        ));
+        
+        produtos.add(new Produto(
+            "Bolinha vazia para colocar comida para cachorros",
+            "Bolinha interativa para colocar comida.",
+            69.99f,
             "/Assets/Images/BolinhaComRação.png",
-        };
+            "Brinquedos"
+        ));
         
         // Laço que cria cada card com o produto
-        for (int i = 0; i < nomes.length; i++) {
+        for (Produto produto : produtos) {
             CardProduto card = new CardProduto();
             
-            card.setDadosProduto(nomes[i], precos[i], imagens[i]);
+            card.setDadosProduto(produto);
             
             PainelProdutos.add(card);
-            
-            PainelProdutos.revalidate();
-            PainelProdutos.repaint();
         }
+        
+        PainelProdutos.revalidate();
+        PainelProdutos.repaint();
     }
     
     private void carregarProdutosRecomendados() {
-        String nomesRecomendados[] = {
+        produtosRecomendados.add(new Produto(
             "Ração para papagaios bico fino sabor frutas",
-            "Mordedor para cachorro, colorido",
-            "Vermífugo para gatos com vermes",
-            "Vermífugo para cachorros com vermes",
-            "Cama para cachorros cor azul",
-            "Cama para gatos cor rosa",
-            "Ração para cachorros champ sabor carne e cereal",
-            "Sachê para gatos whiskas sabor carne",
-        };
-        
-        float precosRecomendados[] = {
+            "Ração para papagaios da marca bico fino sabor frutas e estrusado.",
             79.99f,
-            14.99f,
-            40.99f,
-            19.99f,
-            489.99f,
-            339.99f,
-            59.99f,
-            3.99f,
-        };
-        
-        String imagensRecomendados[] = {
             "/Assets/Images/RaçãoNutrópicaPapagaio.png",
-            "/Assets/Images/MordedorCachorro.png",
-            "/Assets/Images/VermífugoParaGato.png",
-            "/Assets/Images/VermífugoParaCachorro.png",
-            "/Assets/Images/CamaParaCachorro.png",
-            "/Assets/Images/CamaParaGato.png",
-            "/Assets/Images/RaçãoParaCachorroChamp.png",
-            "/Assets/Images/SachêParaGatos.png",
-        };
+            "Ração"
+        ));
         
+        produtosRecomendados.add(new Produto(
+            "Mordedor para cachorro, colorido",
+            "Mordedor para cachorro colorido.",
+            14.99f,
+            "/Assets/Images/MordedorCachorro.png",
+            "Brinquedo"
+        ));
+        
+        produtosRecomendados.add(new Produto(
+            "Vermífugo para gatos com vermes",
+            "Vermífugo para gatos com vermes.",
+            40.99f,
+            "/Assets/Images/VermífugoParaGato.png",
+            "Remédio"
+        ));
+        
+        produtosRecomendados.add(new Produto(
+            "Vermífugo para cachorros com vermes",
+            "Vermífugo para cachorros com vermes.",
+            19.99f,
+            "/Assets/Images/VermífugoParaCachorro.png",
+            "Remédio"
+        ));
+        
+        produtosRecomendados.add(new Produto(
+            "Cama para cachorros cor azul",
+            "Cama para cachorros dormirem na cor azul.",
+            489.99f,
+            "/Assets/Images/CamaParaCachorro.png",
+            "Cama"
+        ));
+        
+        produtosRecomendados.add(new Produto(
+            "Cama para gatos cor rosa",
+            "Cama para gatos dormirem na cor rosa.",
+            339.99f,
+            "/Assets/Images/CamaParaGato.png",
+            "Cama"
+        ));
+        
+        produtosRecomendados.add(new Produto(
+            "Ração para cachorros champ sabor carne e cereal",
+            "Ração para cachorros champ sabor carne e cereal.",
+            59.99f,
+            "/Assets/Images/RaçãoParaCachorroChamp.png",
+            "Ração"
+        ));
+        
+        produtosRecomendados.add(new Produto(
+            "Sachê para gatos whiskas sabor carne",
+            "Sachê para gatos whiskas sabor carne",
+            3.99f,
+            "/Assets/Images/SachêParaGatos.png",
+            "Ração"
+        ));
+
         // Laço que cria cada card com o produto
-        for (int i = 0; i < nomesRecomendados.length; i++) {
+        for (Produto produto : produtosRecomendados) {
             CardProdutosRecomendados card = new CardProdutosRecomendados();
             
-            card.setDadosProduto(nomesRecomendados[i], precosRecomendados[i], imagensRecomendados[i]);
+            card.setDadosProduto(produto);
             
             PainelProdutosRecomendados.add(card);
-            
-            PainelProdutosRecomendados.revalidate();
-            PainelProdutosRecomendados.repaint();
         }
+        
+        PainelProdutosRecomendados.revalidate();
+        PainelProdutosRecomendados.repaint();
     }
 
     @SuppressWarnings("unchecked")
