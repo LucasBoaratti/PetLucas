@@ -15,6 +15,7 @@ public class TelaHome extends javax.swing.JFrame {
 
     public TelaHome() {
         initComponents();
+        adicionarLinksCabecalho();
         carregarProdutos();
         carregarProdutosRecomendados();
         
@@ -37,9 +38,21 @@ public class TelaHome extends javax.swing.JFrame {
         }
     }
     
-    // Método de links para o cabeçalho (Em breve...)
+    // Método de links para o cabeçalho
     private void adicionarLinksCabecalho() {
+        // Criando um link no label home do cabeçalho para ir para a tela home
+        ProdutosLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TelaProdutos telaProdutos = new TelaProdutos();
+                telaProdutos.setVisible(true);
+                
+                dispose();
+            }
+        });
         
+        // Mudando o cursor do mouse
+        ProdutosLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     }
     
     // Carregando os produtos a partir do card criado
@@ -334,7 +347,7 @@ public class TelaHome extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Overflow, javax.swing.GroupLayout.DEFAULT_SIZE, 1097, Short.MAX_VALUE)
+            .addComponent(Overflow, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
 
         pack();
