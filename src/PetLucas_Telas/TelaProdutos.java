@@ -3,6 +3,8 @@ package PetLucas_Telas;
 import Components.CardProduto;
 import java.util.ArrayList;
 import petlucas.Produto;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.io.InputStream;
 
@@ -16,6 +18,7 @@ public class TelaProdutos extends javax.swing.JFrame {
         initComponents();
         adicionarLinksCabecalho();
         carregarTodosProdutos();
+        adicionarEventosFiltros();
         
         try {
             // Aplicando a fonte principal
@@ -65,6 +68,8 @@ public class TelaProdutos extends javax.swing.JFrame {
     
     // Carregando os produtos a partir do card criado
     private void carregarTodosProdutos() {
+        Produtos.setPreferredSize(null);
+        
         // Exibindo os produtos com arraylist
         produtos.add(new Produto(
             "Ração para cachorros golden special carne",
@@ -87,7 +92,7 @@ public class TelaProdutos extends javax.swing.JFrame {
             "Arranhador confortável para gatos.",
             49.99f,
             "/Assets/Images/ArranhadorGato.png",
-            "Brinquedos"
+            "Brinquedo"
         ));
             
         produtos.add(new Produto(
@@ -95,7 +100,7 @@ public class TelaProdutos extends javax.swing.JFrame {
             "Túnel divertido com quatro saídas para gatos.",
             99.99f,
             "/Assets/Images/TunelGato.png",
-            "Brinquedos"
+            "Brinquedo"
         ));
         
         produtos.add(new Produto(
@@ -103,7 +108,7 @@ public class TelaProdutos extends javax.swing.JFrame {
             "Bolinha colorida para diversão dos cachorros.",
             15.99f,
             "/Assets/Images/BolinhaParaCachorro.png",
-            "Brinquedos"
+            "Brinquedo"
         ));
         
         produtos.add(new Produto(
@@ -111,20 +116,204 @@ public class TelaProdutos extends javax.swing.JFrame {
             "Bolinha interativa para colocar comida.",
             69.99f,
             "/Assets/Images/BolinhaComRação.png",
-            "Brinquedos"
+            "Brinquedo"
         ));
         
-        // Laço que cria cada card com o produto
-        for (Produto produto : produtos) {
-            CardProduto card = new CardProduto();
+        produtos.add(new Produto(
+            "Vermífugo para pássaros conta-gotas",
+            "Vermífugo para você cuidar do seu pássaro, caso ele esteja com vermes.",
+            12.99f,
+            "/Assets/Images/VermífugoParaPássaros.png",
+            "Remédio"
+        ));
+        
+        produtos.add(new Produto(
+            "Ração para papagaios bico fino sabor frutas",
+            "Ração para papagaios da marca bico fino sabor frutas e estrusado.",
+            79.99f,
+            "/Assets/Images/RaçãoNutrópicaPapagaio.png",
+            "Ração"
+        ));
+        
+        produtos.add(new Produto(
+            "Mordedor para cachorro, colorido",
+            "Mordedor para cachorro colorido.",
+            14.99f,
+            "/Assets/Images/MordedorCachorro.png",
+            "Brinquedo"
+        ));
+        
+        produtos.add(new Produto(
+            "Vermífugo para gatos com vermes",
+            "Vermífugo para gatos com vermes.",
+            40.99f,
+            "/Assets/Images/VermífugoParaGato.png",
+            "Remédio"
+        ));
+        
+        produtos.add(new Produto(
+            "Vermífugo para cachorros com vermes",
+            "Vermífugo para cachorros com vermes.",
+            19.99f,
+            "/Assets/Images/VermífugoParaCachorro.png",
+            "Remédio"
+        ));
+        
+        produtos.add(new Produto(
+            "Cama para cachorros cor azul",
+            "Cama para cachorros dormirem na cor azul.",
+            489.99f,
+            "/Assets/Images/CamaParaCachorro.png",
+            "Cama"
+        ));
+        
+        produtos.add(new Produto(
+            "Cama para gatos cor rosa",
+            "Cama para gatos dormirem na cor rosa.",
+            339.99f,
+            "/Assets/Images/CamaParaGato.png",
+            "Cama"
+        ));
+        
+        produtos.add(new Produto(
+            "Ração para cachorros champ sabor carne e cereal",
+            "Ração para cachorros champ sabor carne e cereal.",
+            59.99f,
+            "/Assets/Images/RaçãoParaCachorroChamp.png",
+            "Ração"
+        ));
+        
+        produtos.add(new Produto(
+            "Sachê para gatos whiskas sabor carne",
+            "Sachê para gatos whiskas sabor carne",
+            3.99f,
+            "/Assets/Images/SachêParaGatos.png",
+            "Ração"
+        ));
+        
+        produtos.add(new Produto(
+            "Vermífugo para cachorros Chemital com 4 comprimidos",
+            "Vermífugo para cachorros da marca Chemital que possui 4 comprimidos.",
+            5.99f,
+            "/Assets/Images/VermífugoParaCães.png",
+            "Remédio"
+        ));
+        
+        produtos.add(new Produto(
+            "Cama para cachorros grande macia",
+            "Cama para cachorros de porte grande, feita com tecido de almofada.",
+            219.99f,
+            "/Assets/Images/CamaParaCachorrosGrandes.png",
+            "Cama"
+        ));
+        
+        produtos.add(new Produto(
+            "Cama para gatos grande formato toca",
+            "Cama para gatos de porte grande no formato de toca, na cor cinza.",
+            139.99f,
+            "/Assets/Images/CamaParaGatosGrandes.png",
+            "Cama"
+        ));
+        
+        // Método que filtra e cria os cards para os produtos
+        filtrarProduto();
+        
+        Produtos.revalidate();
+        Produtos.repaint();
+        OverflowProdutos.revalidate();
+        OverflowProdutos.repaint();
+    }
+    
+    // Método de filtros
+    private void filtrarProduto() {
+        // Removendo os produtos que estão no painél
+        Produtos.removeAll();
+        
+        // Verificando se um filtro já foi selecionado
+        boolean filtroSelecionado = FiltroRacao.isSelected() || FiltroBrinquedo.isSelected() || FiltroRemedio.isSelected() || FiltroCama.isSelected();
+        
+        for (Produto produto :  produtos) {
+            boolean selecionado = false;
             
-            card.setDadosProduto(produto);
+            // Verifica se o filtro total está selecionado
+            if (FiltroTodos.isSelected() || !filtroSelecionado) {
+                selecionado = true;
+            }
+            else {
+                // Verifica se cada filtro foi selecionado
+                if (FiltroRacao.isSelected() && produto.getTipo().equalsIgnoreCase("Ração")) {
+                    selecionado = true;
+                }
+                
+                if (FiltroBrinquedo.isSelected() && produto.getTipo().equalsIgnoreCase("Brinquedo")) {
+                    selecionado = true;
+                }
+                
+                if (FiltroRemedio.isSelected() && produto.getTipo().equalsIgnoreCase("Remédio")) {
+                    selecionado = true;
+                }
+                
+                if (FiltroCama.isSelected() && produto.getTipo().equalsIgnoreCase("Cama")) {
+                    selecionado = true;
+                }
+            }
             
-            Produtos.add(card);
+            // Se o filtro foi selecionado, o card é criado
+            if (selecionado) {
+                CardProduto card = new CardProduto();
+                
+                card.setDadosProduto(produto);
+                
+                Produtos.add(card);
+            }
         }
         
         Produtos.revalidate();
         Produtos.repaint();
+    }
+    
+    // Método para adicionar os eventos nos checkbox
+    private void adicionarEventosFiltros() {
+        // Evento para o filtro "todos"
+        FiltroTodos.addActionListener(e -> {
+            // Se o filtro todos tiver selecionado, todos os outros filtros serão desmarcados
+            if (FiltroTodos.isSelected()) {
+                FiltroRacao.setSelected(false);
+                FiltroBrinquedo.setSelected(false);
+                FiltroRemedio.setSelected(false);
+                FiltroCama.setSelected(false);
+            }
+            
+            filtrarProduto();
+        });
+        
+        // Evento para o filtro "Ração"
+        FiltroRacao.addActionListener(e -> {
+            FiltroTodos.setSelected(false);
+
+            filtrarProduto();
+        });
+        
+        // Evento para o filtro "Brinquedo"
+        FiltroBrinquedo.addActionListener(e -> {
+            FiltroTodos.setSelected(false);
+
+            filtrarProduto();
+        });
+
+        // Evento para o filtro "Remédio"
+        FiltroRemedio.addActionListener(e -> {
+            FiltroTodos.setSelected(false);
+
+            filtrarProduto();
+        });
+
+        // Evento para o filtro "Cama"
+        FiltroCama.addActionListener(e -> {
+            FiltroTodos.setSelected(false);
+
+            filtrarProduto();
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -145,6 +334,7 @@ public class TelaProdutos extends javax.swing.JFrame {
         FiltroBrinquedo = new javax.swing.JCheckBox();
         FiltroRemedio = new javax.swing.JCheckBox();
         FiltroCama = new javax.swing.JCheckBox();
+        OverflowProdutos = new javax.swing.JScrollPane();
         Produtos = new javax.swing.JPanel();
         Rodape = new javax.swing.JPanel();
         TextoRodape = new javax.swing.JLabel();
@@ -211,8 +401,11 @@ public class TelaProdutos extends javax.swing.JFrame {
 
         FiltroCama.setText("Camas");
 
-        Produtos.setPreferredSize(new java.awt.Dimension(601, 300));
-        Produtos.setLayout(new java.awt.GridLayout(0, 3, 20, 15));
+        Produtos.setOpaque(false);
+        Produtos.setPreferredSize(new java.awt.Dimension(600, 100));
+        Produtos.setLayout(new java.awt.GridLayout(0, 3, 10, 15));
+        OverflowProdutos.setViewportView(Produtos);
+        Produtos.getAccessibleContext().setAccessibleDescription("");
 
         Rodape.setBackground(new java.awt.Color(244, 162, 244));
 
@@ -238,6 +431,7 @@ public class TelaProdutos extends javax.swing.JFrame {
         PaginaProdutosLayout.setHorizontalGroup(
             PaginaProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Cabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Rodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(PaginaProdutosLayout.createSequentialGroup()
                 .addGroup(PaginaProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PaginaProdutosLayout.createSequentialGroup()
@@ -257,10 +451,9 @@ public class TelaProdutos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(FiltroCama))
                     .addGroup(PaginaProdutosLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(Produtos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
-            .addComponent(Rodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(17, 17, 17)
+                        .addComponent(OverflowProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         PaginaProdutosLayout.setVerticalGroup(
             PaginaProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,13 +469,11 @@ public class TelaProdutos extends javax.swing.JFrame {
                     .addComponent(FiltroBrinquedo)
                     .addComponent(FiltroRemedio)
                     .addComponent(FiltroCama))
-                .addGap(18, 18, 18)
-                .addComponent(Produtos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(OverflowProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Rodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        Produtos.getAccessibleContext().setAccessibleDescription("");
 
         Overflow.setViewportView(PaginaProdutos);
 
@@ -294,7 +485,9 @@ public class TelaProdutos extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Overflow, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Overflow, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -319,6 +512,7 @@ public class TelaProdutos extends javax.swing.JFrame {
     private javax.swing.JLabel HomeLabel;
     private javax.swing.JLabel LogoMarca;
     private javax.swing.JScrollPane Overflow;
+    private javax.swing.JScrollPane OverflowProdutos;
     private javax.swing.JPanel PaginaProdutos;
     private javax.swing.JPanel Produtos;
     private javax.swing.JLabel ProdutosLabel;
