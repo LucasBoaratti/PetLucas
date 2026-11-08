@@ -1,12 +1,21 @@
 package PetLucas_Telas;
 
+import Components.CardProduto;
+import java.util.ArrayList;
+import petlucas.Produto;
+import java.awt.Font;
+import java.io.InputStream;
+
 public class TelaProdutos extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaProdutos.class.getName());
+    
+    private ArrayList<Produto> produtos = new ArrayList<>();
 
     public TelaProdutos() {
         initComponents();
         adicionarLinksCabecalho();
+        carregarTodosProdutos();
         
         try {
             // Aplicando a fonte principal
@@ -53,25 +62,98 @@ public class TelaProdutos extends javax.swing.JFrame {
         // Mudando o cursor do mouse
         HomeLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     }
+    
+    // Carregando os produtos a partir do card criado
+    private void carregarTodosProdutos() {
+        // Exibindo os produtos com arraylist
+        produtos.add(new Produto(
+            "Ração para cachorros golden special carne",
+            "Ração Golden Special sabor carne para cachorros.",
+            199.99f,
+            "/Assets/Images/RaçãoGolden.png",
+            "Ração"
+        ));
+        
+        produtos.add(new Produto(
+            "Ração para gatos golden special carne e frango",
+            "Ração Golden Special sabor carne e frango para gatos.",
+            59.99f,
+            "/Assets/Images/RaçãoGoldenGatos.png",
+            "Ração"
+        ));
+        
+        produtos.add(new Produto(
+            "Arranhador para gatos macio e duro",
+            "Arranhador confortável para gatos.",
+            49.99f,
+            "/Assets/Images/ArranhadorGato.png",
+            "Brinquedos"
+        ));
+            
+        produtos.add(new Produto(
+            "Túnel com 4 saídas de brinquedo para gatos divertidos",
+            "Túnel divertido com quatro saídas para gatos.",
+            99.99f,
+            "/Assets/Images/TunelGato.png",
+            "Brinquedos"
+        ));
+        
+        produtos.add(new Produto(
+            "Bolinha colorida de brinquedo para cachorros",
+            "Bolinha colorida para diversão dos cachorros.",
+            15.99f,
+            "/Assets/Images/BolinhaParaCachorro.png",
+            "Brinquedos"
+        ));
+        
+        produtos.add(new Produto(
+            "Bolinha vazia para colocar comida para cachorros",
+            "Bolinha interativa para colocar comida.",
+            69.99f,
+            "/Assets/Images/BolinhaComRação.png",
+            "Brinquedos"
+        ));
+        
+        // Laço que cria cada card com o produto
+        for (Produto produto : produtos) {
+            CardProduto card = new CardProduto();
+            
+            card.setDadosProduto(produto);
+            
+            Produtos.add(card);
+        }
+        
+        Produtos.revalidate();
+        Produtos.repaint();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Overflow = new javax.swing.JScrollPane();
+        PaginaProdutos = new javax.swing.JPanel();
         Cabecalho = new javax.swing.JPanel();
         LogoMarca = new javax.swing.JLabel();
         HomeLabel = new javax.swing.JLabel();
         ProdutosLabel = new javax.swing.JLabel();
         CarrinhoLabel = new javax.swing.JLabel();
         TextoProdutosLoja = new javax.swing.JLabel();
-        TextoFiltros = new javax.swing.JLabel();
         FiltroTodos = new javax.swing.JCheckBox();
+        TextoFiltros = new javax.swing.JLabel();
         FiltroRacao = new javax.swing.JCheckBox();
         FiltroBrinquedo = new javax.swing.JCheckBox();
         FiltroRemedio = new javax.swing.JCheckBox();
         FiltroCama = new javax.swing.JCheckBox();
+        Produtos = new javax.swing.JPanel();
+        Rodape = new javax.swing.JPanel();
+        TextoRodape = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Overflow.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        PaginaProdutos.setPreferredSize(new java.awt.Dimension(650, 424));
 
         Cabecalho.setBackground(new java.awt.Color(244, 162, 244));
 
@@ -91,9 +173,9 @@ public class TelaProdutos extends javax.swing.JFrame {
         CabecalhoLayout.setHorizontalGroup(
             CabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CabecalhoLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(LogoMarca)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(HomeLabel)
                 .addGap(18, 18, 18)
                 .addComponent(ProdutosLabel)
@@ -103,22 +185,23 @@ public class TelaProdutos extends javax.swing.JFrame {
         );
         CabecalhoLayout.setVerticalGroup(
             CabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LogoMarca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(CabecalhoLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(CabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(HomeLabel)
                     .addComponent(ProdutosLabel)
-                    .addComponent(CarrinhoLabel))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(CarrinhoLabel)))
+            .addGroup(CabecalhoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LogoMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         TextoProdutosLoja.setText("Confira todos os produtos da loja aqui");
 
-        TextoFiltros.setText("Filtros:");
-
         FiltroTodos.setText("Todos");
         FiltroTodos.addActionListener(this::FiltroTodosActionPerformed);
+
+        TextoFiltros.setText("Filtros:");
 
         FiltroRacao.setText("Rações");
 
@@ -128,45 +211,90 @@ public class TelaProdutos extends javax.swing.JFrame {
 
         FiltroCama.setText("Camas");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Cabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(224, 224, 224)
-                .addComponent(TextoProdutosLoja)
+        Produtos.setPreferredSize(new java.awt.Dimension(601, 300));
+        Produtos.setLayout(new java.awt.GridLayout(0, 3, 20, 15));
+
+        Rodape.setBackground(new java.awt.Color(244, 162, 244));
+
+        TextoRodape.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        TextoRodape.setText("PetLucas, 2026");
+
+        javax.swing.GroupLayout RodapeLayout = new javax.swing.GroupLayout(Rodape);
+        Rodape.setLayout(RodapeLayout);
+        RodapeLayout.setHorizontalGroup(
+            RodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RodapeLayout.createSequentialGroup()
+                .addGap(269, 269, 269)
+                .addComponent(TextoRodape)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TextoFiltros)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(FiltroTodos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(FiltroRacao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(FiltroBrinquedo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(FiltroRemedio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(FiltroCama)
-                .addGap(102, 102, 102))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        RodapeLayout.setVerticalGroup(
+            RodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(TextoRodape, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout PaginaProdutosLayout = new javax.swing.GroupLayout(PaginaProdutos);
+        PaginaProdutos.setLayout(PaginaProdutosLayout);
+        PaginaProdutosLayout.setHorizontalGroup(
+            PaginaProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Cabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(PaginaProdutosLayout.createSequentialGroup()
+                .addGroup(PaginaProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PaginaProdutosLayout.createSequentialGroup()
+                        .addGap(221, 221, 221)
+                        .addComponent(TextoProdutosLoja))
+                    .addGroup(PaginaProdutosLayout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(TextoFiltros)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FiltroTodos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FiltroRacao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FiltroBrinquedo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FiltroRemedio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FiltroCama))
+                    .addGroup(PaginaProdutosLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(Produtos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
+            .addComponent(Rodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        PaginaProdutosLayout.setVerticalGroup(
+            PaginaProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PaginaProdutosLayout.createSequentialGroup()
                 .addComponent(Cabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TextoProdutosLoja)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(TextoProdutosLoja)
+                .addGap(21, 21, 21)
+                .addGroup(PaginaProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextoFiltros)
                     .addComponent(FiltroTodos)
                     .addComponent(FiltroRacao)
                     .addComponent(FiltroBrinquedo)
                     .addComponent(FiltroRemedio)
                     .addComponent(FiltroCama))
-                .addGap(0, 272, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(Produtos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addComponent(Rodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        Produtos.getAccessibleContext().setAccessibleDescription("");
+
+        Overflow.setViewportView(PaginaProdutos);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Overflow, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Overflow, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
         );
 
         pack();
@@ -190,8 +318,13 @@ public class TelaProdutos extends javax.swing.JFrame {
     private javax.swing.JCheckBox FiltroTodos;
     private javax.swing.JLabel HomeLabel;
     private javax.swing.JLabel LogoMarca;
+    private javax.swing.JScrollPane Overflow;
+    private javax.swing.JPanel PaginaProdutos;
+    private javax.swing.JPanel Produtos;
     private javax.swing.JLabel ProdutosLabel;
+    private javax.swing.JPanel Rodape;
     private javax.swing.JLabel TextoFiltros;
     private javax.swing.JLabel TextoProdutosLoja;
+    private javax.swing.JLabel TextoRodape;
     // End of variables declaration//GEN-END:variables
 }
