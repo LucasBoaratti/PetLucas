@@ -1,14 +1,21 @@
 package PetLucas_Telas;
 
+import Components.CardProdutoCarrinho;
+import java.util.ArrayList;
+import petlucas.ItemCarrinho;
 import petlucas.Produto;
 
 public class TelaCarrinho extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaCarrinho.class.getName());
+    
+    private static ArrayList<ItemCarrinho> produtosCarrinho = new ArrayList<>();
 
     public TelaCarrinho() {
         initComponents();
         adicionarLinksCabecalho();
+        carregarProdutosCarrinho();
+        atualizarPrecoTotal();
         
         try {
             // Aplicando a fonte principal
@@ -26,10 +33,7 @@ public class TelaCarrinho extends javax.swing.JFrame {
             ProdutosLabel.setFont(titleFont);
             CarrinhoLabel.setFont(titleFont);
             TextoCarrinho.setFont(titleFont);
-            NomeProduto.setFont(titleFont);
-            
-            PrecoProduto.setFont(textFont);
-            Quantidade.setFont(textFont);
+
             ResumoPedidoTexto.setFont(textFont);
             PrecoTotal.setFont(textFont);
         }
@@ -38,13 +42,23 @@ public class TelaCarrinho extends javax.swing.JFrame {
         }
     }
     
-    public TelaCarrinho(Produto produto, int quantidade) {
-        initComponents();
-        adicionarLinksCabecalho();
+    // Método para carregar os produtos no carrinho
+    private void carregarProdutosCarrinho() {
+        ProdutosSelecionados.removeAll();
         
-        setDadosProduto(produto, quantidade);
+        // Percorre cada produto adicionado ao carrinho
+        for (ItemCarrinho item : produtosCarrinho) {
+            CardProdutoCarrinho card = new CardProdutoCarrinho();
+            
+            card.setDadosProduto(item.getProduto(), item.getQuantidade());
+            
+            ProdutosSelecionados.add(card);
+        }
+        
+        ProdutosSelecionados.revalidate();
+        ProdutosSelecionados.repaint();
     }
-    
+
     // Método que adiciona links no cabecalho
     private void adicionarLinksCabecalho() {
         // Criando um link no label home do cabeçalho para ir para a tela home
@@ -75,40 +89,33 @@ public class TelaCarrinho extends javax.swing.JFrame {
         ProdutosLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     }
     
-    // Método que exibe o produto no carrinho do usuário
-    public void setDadosProduto(Produto produto, int quantidade) {
-        // Aplicando o nome do produto com tag HTML para quebrar linha
-        String labelNomeProduto = "<html><body style='width: 70px; text-align: left'>"
-                + produto.getNome()
-                + "</body></html>";
+    // Método para carregar os produtos no carrinho
+    
+    // Método para adicionar o produto no carrinho
+    public static void adicionarProduto(Produto produto, int quantidade) {
+        ItemCarrinho item = new ItemCarrinho(produto, quantidade);
         
-        NomeProduto.setText(labelNomeProduto);
-        
-        // Calculando o preço total, de acordo com a quantidade escolhida pelo usuário
-        float precoTotal = produto.getPreco() * quantidade;
-        PrecoProduto.setText(String.format("R$ %.2f", precoTotal));
-        
-        Quantidade.setText(String.format("Quantidade: %d", quantidade));
-        
-        // Carregando a imagem do produto
-        try {
-            // Carregando a imagem individual
-            java.awt.Image imagemOriginal = javax.imageio.ImageIO.read(getClass().getResource(produto.getImagem()));
-            
-            // Definindo o tamanho da imagem
-            int largura = 115;
-            int altura = 115;
-            
-            // Redimensionando a imagem
-            java.awt.Image imagemAlterada = imagemOriginal.getScaledInstance(largura, altura, java.awt.Image.SCALE_DEFAULT);
-            
-            ImagemProduto.setIcon(new javax.swing.ImageIcon(imagemAlterada));
-        }
-        catch (Exception e) {
-            System.out.println("Erro ao carregar a imagem: " + produto.getImagem());
-        }
+        produtosCarrinho.add(item);
     }
-
+    
+    // Método para calcular o preço total
+    private float calcularPrecoTotal() {
+        float precoTotal = 0;
+        
+        for (ItemCarrinho item : produtosCarrinho) {
+            precoTotal += item.getPrecoTotal();
+        }
+        
+        return precoTotal;
+    }
+    
+    // Método para atualizar o preço total no JLabel
+    private void atualizarPrecoTotal() {
+        float total = calcularPrecoTotal();
+        
+        PrecoTotal.setText(String.format("R$ %.2f", total));
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -121,17 +128,13 @@ public class TelaCarrinho extends javax.swing.JFrame {
         ProdutosLabel = new javax.swing.JLabel();
         CarrinhoLabel = new javax.swing.JLabel();
         TextoCarrinho = new javax.swing.JLabel();
-        Produtos = new javax.swing.JPanel();
-        ImagemProduto = new javax.swing.JLabel();
-        NomeProduto = new javax.swing.JLabel();
-        PrecoProduto = new javax.swing.JLabel();
-        Quantidade = new javax.swing.JLabel();
         ResumoPedido = new javax.swing.JPanel();
         ResumoPedidoTexto = new javax.swing.JLabel();
         PrecoTotal = new javax.swing.JLabel();
         BotaoRealizarPagamento = new javax.swing.JButton();
         Rodape = new javax.swing.JPanel();
         TextoRodape = new javax.swing.JLabel();
+        ProdutosSelecionados = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -181,44 +184,6 @@ public class TelaCarrinho extends javax.swing.JFrame {
 
         TextoCarrinho.setText("Seu carrinho");
 
-        NomeProduto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        NomeProduto.setText("NomeProduto");
-
-        PrecoProduto.setText("Preço");
-
-        Quantidade.setText("Quantidade");
-
-        javax.swing.GroupLayout ProdutosLayout = new javax.swing.GroupLayout(Produtos);
-        Produtos.setLayout(ProdutosLayout);
-        ProdutosLayout.setHorizontalGroup(
-            ProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ProdutosLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(ImagemProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(ProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(NomeProduto)
-                    .addComponent(Quantidade)
-                    .addComponent(PrecoProduto))
-                .addContainerGap(80, Short.MAX_VALUE))
-        );
-        ProdutosLayout.setVerticalGroup(
-            ProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ProdutosLayout.createSequentialGroup()
-                .addGroup(ProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ProdutosLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(ImagemProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(ProdutosLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(NomeProduto)
-                        .addGap(27, 27, 27)
-                        .addComponent(PrecoProduto)
-                        .addGap(18, 18, 18)
-                        .addComponent(Quantidade)))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-
         ResumoPedido.setBackground(new java.awt.Color(244, 162, 244));
 
         ResumoPedidoTexto.setText("Resumo do pedido");
@@ -257,7 +222,7 @@ public class TelaCarrinho extends javax.swing.JFrame {
                 .addComponent(ResumoPedidoTexto)
                 .addGap(29, 29, 29)
                 .addComponent(PrecoTotal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(BotaoRealizarPagamento)
                 .addContainerGap())
         );
@@ -281,26 +246,29 @@ public class TelaCarrinho extends javax.swing.JFrame {
             .addComponent(TextoRodape, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
         );
 
+        ProdutosSelecionados.setLayout(new java.awt.GridLayout(0, 1, 0, 20));
+
         javax.swing.GroupLayout CarrinhoComprasLayout = new javax.swing.GroupLayout(CarrinhoCompras);
         CarrinhoCompras.setLayout(CarrinhoComprasLayout);
         CarrinhoComprasLayout.setHorizontalGroup(
             CarrinhoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CarrinhoComprasLayout.createSequentialGroup()
+                .addGroup(CarrinhoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(Rodape, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Cabecalho, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 424, Short.MAX_VALUE))
             .addGroup(CarrinhoComprasLayout.createSequentialGroup()
                 .addGroup(CarrinhoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CarrinhoComprasLayout.createSequentialGroup()
                         .addGap(289, 289, 289)
                         .addComponent(TextoCarrinho))
                     .addGroup(CarrinhoComprasLayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(Produtos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
+                        .addGap(29, 29, 29)
+                        .addComponent(ProdutosSelecionados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CarrinhoComprasLayout.createSequentialGroup()
+                        .addGap(430, 430, 430)
                         .addComponent(ResumoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(CarrinhoComprasLayout.createSequentialGroup()
-                .addGroup(CarrinhoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(Rodape, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Cabecalho, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 424, Short.MAX_VALUE))
         );
         CarrinhoComprasLayout.setVerticalGroup(
             CarrinhoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,10 +277,10 @@ public class TelaCarrinho extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(TextoCarrinho)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(CarrinhoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ResumoPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Produtos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
+                .addGroup(CarrinhoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ResumoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ProdutosSelecionados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addComponent(Rodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -346,15 +314,11 @@ public class TelaCarrinho extends javax.swing.JFrame {
     private javax.swing.JPanel CarrinhoCompras;
     private javax.swing.JLabel CarrinhoLabel;
     private javax.swing.JLabel HomeLabel;
-    private javax.swing.JLabel ImagemProduto;
     private javax.swing.JLabel LogoMarca;
-    private javax.swing.JLabel NomeProduto;
     private javax.swing.JScrollPane Overflow;
-    private javax.swing.JLabel PrecoProduto;
     private javax.swing.JLabel PrecoTotal;
-    private javax.swing.JPanel Produtos;
     private javax.swing.JLabel ProdutosLabel;
-    private javax.swing.JLabel Quantidade;
+    private javax.swing.JPanel ProdutosSelecionados;
     private javax.swing.JPanel ResumoPedido;
     private javax.swing.JLabel ResumoPedidoTexto;
     private javax.swing.JPanel Rodape;

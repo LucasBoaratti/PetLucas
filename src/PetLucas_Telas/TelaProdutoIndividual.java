@@ -320,9 +320,12 @@ public class TelaProdutoIndividual extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotaoAdicionarCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAdicionarCarrinhoActionPerformed
-        TelaCarrinho telaCarrinho = new TelaCarrinho(produto, quantidadeProduto);
+        TelaCarrinho.adicionarProduto(produto, quantidadeProduto);
         
+        TelaCarrinho telaCarrinho = new TelaCarrinho();
         telaCarrinho.setVisible(true);
+        
+        dispose();
     }//GEN-LAST:event_BotaoAdicionarCarrinhoActionPerformed
 
     public static void main(String args[]) {
