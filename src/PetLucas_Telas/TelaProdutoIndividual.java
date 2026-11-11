@@ -11,6 +11,7 @@ public class TelaProdutoIndividual extends javax.swing.JFrame {
     
     // Variável para controlar a quantidade de produtos escolhidos pelo usuário
     private int quantidadeProduto = 1;
+    Produto produto;
     
     public TelaProdutoIndividual() {
         initComponents();
@@ -58,12 +59,39 @@ public class TelaProdutoIndividual extends javax.swing.JFrame {
         
         // Mudando o cursor do mouse
         HomeLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        
+        ProdutosLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TelaProdutos telaProdutos = new TelaProdutos();
+                telaProdutos.setVisible(true);
+                
+                dispose();
+            }
+        });
+        
+        // Mudando o cursor do mouse
+        ProdutosLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        
+        CarrinhoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TelaCarrinho telaCarrinho = new TelaCarrinho();
+                telaCarrinho.setVisible(true);
+                
+                dispose();
+            }
+        });
+        
+        // Mudando o cursor do mouse
+        CarrinhoLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     }
     
     // Construtor que "leva" o produto para a página de produto individual
     public TelaProdutoIndividual(Produto produto) {
         this();
         
+        this.produto = produto;
         carregarProduto(produto);
     }
     
@@ -80,6 +108,8 @@ public class TelaProdutoIndividual extends javax.swing.JFrame {
                 + "</body></html>";
         
         DescricaoProduto.setText(labelDescricaoProduto);
+        
+        PrecoProduto.setText(String.format("R$ %.2f", produto.getPreco()));
         
         // Buscando a imagem
         try {
@@ -135,6 +165,7 @@ public class TelaProdutoIndividual extends javax.swing.JFrame {
         ImagemProduto = new javax.swing.JLabel();
         NomeProduto = new javax.swing.JLabel();
         DescricaoProduto = new javax.swing.JLabel();
+        PrecoProduto = new javax.swing.JLabel();
         QuantidadeProduto = new javax.swing.JLabel();
         Quantidade = new javax.swing.JLabel();
         BotaoAdicionarCarrinho = new javax.swing.JButton();
@@ -192,6 +223,8 @@ public class TelaProdutoIndividual extends javax.swing.JFrame {
 
         DescricaoProduto.setText("DescricaoProduto");
 
+        PrecoProduto.setText("Preço");
+
         QuantidadeProduto.setText("Quantidade:");
 
         Quantidade.setText("1");
@@ -246,7 +279,8 @@ public class TelaProdutoIndividual extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Mais, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(Mais, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(PrecoProduto)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(BotaoAdicionarCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -262,21 +296,23 @@ public class TelaProdutoIndividual extends javax.swing.JFrame {
                     .addComponent(ImagemProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(NomeProduto)
-                        .addGap(37, 37, 37)
+                        .addGap(18, 18, 18)
                         .addComponent(DescricaoProduto)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
+                                .addGap(26, 26, 26)
+                                .addComponent(PrecoProduto)
+                                .addGap(28, 28, 28)
                                 .addComponent(QuantidadeProduto))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
+                                .addGap(65, 65, 65)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Mais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Menos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(74, 74, 74)
+                        .addGap(198, 198, 198)
                         .addComponent(BotaoAdicionarCarrinho)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Rodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -284,7 +320,9 @@ public class TelaProdutoIndividual extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotaoAdicionarCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAdicionarCarrinhoActionPerformed
-        // TODO add your handling code here:
+        TelaCarrinho telaCarrinho = new TelaCarrinho(produto, quantidadeProduto);
+        
+        telaCarrinho.setVisible(true);
     }//GEN-LAST:event_BotaoAdicionarCarrinhoActionPerformed
 
     public static void main(String args[]) {
@@ -302,6 +340,7 @@ public class TelaProdutoIndividual extends javax.swing.JFrame {
     private javax.swing.JButton Mais;
     private javax.swing.JButton Menos;
     private javax.swing.JLabel NomeProduto;
+    private javax.swing.JLabel PrecoProduto;
     private javax.swing.JLabel ProdutosLabel;
     private javax.swing.JLabel Quantidade;
     private javax.swing.JLabel QuantidadeProduto;

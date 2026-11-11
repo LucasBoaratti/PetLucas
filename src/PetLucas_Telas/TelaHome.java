@@ -40,7 +40,6 @@ public class TelaHome extends javax.swing.JFrame {
     
     // Método de links para o cabeçalho
     private void adicionarLinksCabecalho() {
-        // Criando um link no label home do cabeçalho para ir para a tela home
         ProdutosLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -53,6 +52,19 @@ public class TelaHome extends javax.swing.JFrame {
         
         // Mudando o cursor do mouse
         ProdutosLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        
+        CarrinhoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TelaCarrinho telaCarrinho = new TelaCarrinho();
+                telaCarrinho.setVisible(true);
+                
+                dispose();
+            }
+        });
+        
+        // Mudando o cursor do mouse
+        CarrinhoLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     }
     
     // Carregando os produtos a partir do card criado
