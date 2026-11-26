@@ -301,7 +301,8 @@ public class TelaCarrinho extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotaoRealizarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoRealizarPagamentoActionPerformed
-        // TODO add your handling code here:
+        TelaPagamento telaPagamento = new TelaPagamento();
+        telaPagamento.setVisible(true);
     }//GEN-LAST:event_BotaoRealizarPagamentoActionPerformed
 
     public static void main(String args[]) {

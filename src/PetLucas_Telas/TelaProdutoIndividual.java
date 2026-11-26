@@ -234,9 +234,15 @@ public class TelaProdutoIndividual extends javax.swing.JFrame {
         BotaoAdicionarCarrinho.addActionListener(this::BotaoAdicionarCarrinhoActionPerformed);
 
         Menos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/Menos.png"))); // NOI18N
+        Menos.setBorder(null);
+        Menos.setBorderPainted(false);
+        Menos.setContentAreaFilled(false);
         Menos.setPreferredSize(new java.awt.Dimension(25, 25));
 
         Mais.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/Mais.png"))); // NOI18N
+        Mais.setBorder(null);
+        Mais.setBorderPainted(false);
+        Mais.setContentAreaFilled(false);
         Mais.setPreferredSize(new java.awt.Dimension(25, 25));
 
         Rodape.setBackground(new java.awt.Color(244, 162, 244));
